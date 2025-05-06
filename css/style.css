@@ -1,0 +1,153 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #141414;
+    color: white;
+    line-height: 1.5;
+}
+
+/* Video Grid Item Styles */
+.video-item {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.video-item:hover {
+    transform: scale(1.05);
+}
+
+.video-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-item:hover .overlay {
+    opacity: 1;
+}
+
+.video-item .play-icon {
+    font-size: 3rem;
+    color: white;
+    filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));
+}
+
+/* Video Player Controls */
+#video-controls {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#video-modal:hover #video-controls {
+    opacity: 1;
+}
+
+/* Custom Range Input Styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.2);
+    height: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #E50914;
+    cursor: pointer;
+}
+
+/* Video Modal Animation */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#video-modal.active {
+    display: block;
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #E50914;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error Message */
+.error-message {
+    background-color: rgba(229,9,20,0.1);
+    border: 1px solid #E50914;
+    color: #E50914;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .video-item {
+        aspect-ratio: 16/12;
+    }
+    
+    #video-controls {
+        opacity: 1;
+    }
+    
+    .video-item .overlay {
+        opacity: 1;
+        background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    }
+}
+
+/* Video Title */
+.video-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    font-weight: 500;
+}
